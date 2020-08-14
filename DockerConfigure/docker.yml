@@ -1,0 +1,71 @@
+- hosts: rhelgui
+  tasks:
+    - name: Adding App Stream
+      yum_repository: 
+        name: package1
+        description: App Stream repo
+        baseurl: file:///dvd/AppStream
+        gpgcheck: no
+     
+    - name: Adding BaseOS
+      yum_repository:
+        name: package2
+        description: BaseOS repo
+        baseurl: file:///dvd/BaseOS
+        gpgcheck: no 
+
+    - name: Docker repo create
+      yum_repository: 
+        name: docker 
+        description: Docker repo
+        baseurl: https://download.docker.com/linux/centos/7/x86_64/stable/
+        gpgcheck: no
+
+    - name: Docker installation
+      command: yum install docker-ce --nobest
+
+   
+    - name: Starting Docker services
+      service:
+        name: docker 
+        state: started
+        
+
+    - name: Copying my files
+      copy:
+        src: index.html
+        dest: /root/dockerfiles/
+
+    - name: Copying dockerfile   
+      copy:
+        src: Dockerfile
+        dest: /root/dockerfiles/
+
+    - name: Pull CentOS image
+      docker_image:
+        name: webpage
+        path: /root/dockerfiles/
+         
+  
+    - name: Create Contaier 
+      docker_container:
+         name: web
+         image: webpage
+         state: started
+         ports:
+         - "1234:80"
+         tty: true
+         detach: true     
+
+
+
+
+
+
+
+
+
+
+
+
+
