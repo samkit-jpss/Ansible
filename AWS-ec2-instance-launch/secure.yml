@@ -1,2 +1,5 @@
 user: "name"  #user acces key
 pass: "fqhdafhjbadsjksf437gtbfjak" #secret key
+
+
+#In the command promt run command: ansible-playbook --ask-vault-pass ec2.yml
