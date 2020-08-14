@@ -1,2 +1,2 @@
-user: "xyz@gmail.com"  #email of sender
-pass: "password"  #password of the sender
+uname: "xyz@gmail.com"  #email of sender
+mypass: "password"  #password of the sender
