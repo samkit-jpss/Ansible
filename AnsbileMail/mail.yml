@@ -1,0 +1,14 @@
+- hosts: localhost
+  vars_files: 
+      - var1.yml #saved password and username of the sender in var1.yml file 
+
+  tasks:
+          - name: "Sending Mail"
+            mail:
+                host: smtp.gmail.com
+                port: 587
+                username: "{{ uname }}"
+                password: "{{ mypass }}"
+                to: "abcd@gmail.com" #Your email address
+                subject: Message from ansible 
+                body: Message from {{ ansible_hostname }}
