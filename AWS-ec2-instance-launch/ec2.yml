@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars_files:
+          - secure.yml
+
+  tasks:
+            - ec2: 
+                    key_name: "key1"
+                    instance_type: "t2.micro"
+                    image: "ami-0ebc1ac48dfd14136"
+                    wait: yes
+                    count: 1
+                    vpc_subnet_id: "subnet-60f1cb08"
+                    assign_public_ip: yes
+                    group_id: "sg-d9b7c4bb"
+                    region: "ap-south-1"
+                    state: present
+                    aws_access_key: "{{ user }}"
+                    aws_secret_key: "{{ pass }}"       
